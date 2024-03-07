@@ -11,13 +11,13 @@ const TaskSchema = new mongoose.Schema({
         type: String , 
         required:true ,
         trim : true , 
-        maxLength:20 , 
+        maxLength:40 , 
     }, 
     taskDescription:{
         type: String , 
         required:true ,
         trim : true , 
-        maxLength:100 ,
+        maxLength:300 ,
     },
     taskType:{
         type: String , 

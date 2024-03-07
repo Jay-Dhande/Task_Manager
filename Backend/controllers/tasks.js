@@ -2,14 +2,38 @@ const TaskSchema =  require('../models/TaskModel') ;
 
 exports.addTask =  async( req , res) => {
 
-    const { name, taskTitle, taskDescription,taskType,Adddate , Targetdate } = req.body ;
+    const { name ,taskTitle, taskDescription,taskType,Adddate , Targetdate  } = req.body ;
     
     const tasks = TaskSchema({
         name, taskTitle, taskDescription,taskType,Adddate , Targetdate
     }) 
 
     try {
+        if(!name  ){
+            
+            return res.status(400).json({message:"Fill name Properly"})
+        }
+        if(!taskTitle ){
+            
+            return res.status(400).json({message:"Fill !taskTitle Properly"})
+        }
+        if(!taskDescription ){
+            
+            return res.status(400).json({message:"Fill !taskDescription Properly"})
+        }
+        if( !taskType ){
+            
+            return res.status(400).json({message:"Fill !taskType Properly"})
+        }
         if(!name || !taskTitle || !taskDescription || !taskType || !Adddate ){
+            
+            return res.status(400).json({message:"Fill All Fields Properly"})
+        }
+
+
+
+        if(!name || !taskTitle || !taskDescription || !taskType || !Adddate ){
+            
             return res.status(400).json({message:"Fill All Fields Properly"})
         }
         if(Adddate > Targetdate && Targetdate){
@@ -27,7 +51,7 @@ exports.addTask =  async( req , res) => {
 
 exports.getTask = async(req , res) => {
     try{
-            const tasks =  await TaskSchema.find() ; 
+            const tasks =  await TaskSchema.find({name:req.query.name}).sort({createdAt: -1}) ; 
             res.status(200).json(tasks) ; 
     }
     catch(err){
@@ -35,6 +59,18 @@ exports.getTask = async(req , res) => {
     }
 }
 
+exports.getdata = async(req , res) =>{
+    try{
+        console.log("req.params", req.params);
+        console.log("req body" , req.body) ; 
+        console.log("req query" , req.query) ; 
+        const tasks =  await TaskSchema.find({name:req.query.name}).sort({createdAt: -1}) ; 
+        res.status(200).json(tasks) ; 
+    }
+    catch(err){
+     res.status(500).json({message:"Some Error Occured" })
+}
+}
 
 // {
 //    "name": "user one", 
