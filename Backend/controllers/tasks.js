@@ -9,22 +9,22 @@ exports.addTask =  async( req , res) => {
     }) 
 
     try {
-        if(!name  ){
+        // if(!name  ){
             
-            return res.status(400).json({message:"Fill name Properly"})
-        }
-        if(!taskTitle ){
+        //     return res.status(400).json({message:"Fill name Properly"})
+        // }
+        // if(!taskTitle ){
             
-            return res.status(400).json({message:"Fill !taskTitle Properly"})
-        }
-        if(!taskDescription ){
+        //     return res.status(400).json({message:"Fill !taskTitle Properly"})
+        // }
+        // if(!taskDescription ){
             
-            return res.status(400).json({message:"Fill !taskDescription Properly"})
-        }
-        if( !taskType ){
+        //     return res.status(400).json({message:"Fill !taskDescription Properly"})
+        // }
+        // if( !taskType ){
             
-            return res.status(400).json({message:"Fill !taskType Properly"})
-        }
+        //     return res.status(400).json({message:"Fill !taskType Properly"})
+        // }
         if(!name || !taskTitle || !taskDescription || !taskType || !Adddate ){
             
             return res.status(400).json({message:"Fill All Fields Properly"})
