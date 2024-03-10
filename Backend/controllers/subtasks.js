@@ -1,10 +1,10 @@
 const SubTaskSchema =  require('../models/SubTaskModel')
 
-exports.addsubTask = async(req,res) => {
-    const {name , taskTitle, taskDescription,taskType,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate} = req.body ;
+exports.addSubTask = async(req,res) => {
+    const {name , taskTitle,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate} = req.body ;
 
     const subTasks = SubTaskSchema({
-        name , taskTitle, taskDescription,taskType,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate
+        name , taskTitle,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate
     }) ;
     try {
         await subTasks.save() ; 
@@ -16,4 +16,15 @@ exports.addsubTask = async(req,res) => {
 
 }
 
-
+exports.getSubTasks = async(req , res) => {
+    try{ 
+        const subtasks =  await SubTaskSchema.find({
+            name: req.query.name,
+            taskTitle: req.query.taskTitle
+          }).sort({ createdAt: -1 });
+        res.status(200).json(subtasks) ; 
+    }
+    catch(err){
+     res.status(500).json({message:"Some Error Occured" })
+}
+}

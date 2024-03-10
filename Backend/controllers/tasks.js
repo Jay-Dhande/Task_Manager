@@ -59,12 +59,20 @@ exports.getTask = async(req , res) => {
     }
 }
 
-exports.getdata = async(req , res) =>{
+exports.getdata = async(req , res) => {
+    // console.log("req.params out", req.params);
+    // console.log("req body out" , req.body) ; 
+    // console.log("req query out" , req.query) ; 
+    // console.log("req out" , req) ; 
+    
     try{
-        console.log("req.params", req.params);
-        console.log("req body" , req.body) ; 
-        console.log("req query" , req.query) ; 
-        const tasks =  await TaskSchema.find({name:req.query.name}).sort({createdAt: -1}) ; 
+        // console.log("req.params", req.params);
+        // console.log("req body" , req.body) ; 
+        // console.log("req query" , req.query) ; 
+        const tasks =  await TaskSchema.find({
+            name: req.query.name,
+            taskTitle: req.query.taskTitle
+          }).sort({ createdAt: -1 });
         res.status(200).json(tasks) ; 
     }
     catch(err){
