@@ -1,7 +1,7 @@
 const mongoose =  require("mongoose") ; 
 
 const TaskSchema = new mongoose.Schema({
-    name: {
+    email: {
         type: String ,
         required: true ,  
         trim: true , 
@@ -35,6 +35,10 @@ const TaskSchema = new mongoose.Schema({
         required: true,
         trim: true,
     } ,
+    Done:{
+        type: Boolean ,
+        required:true
+    }
 
     
 });

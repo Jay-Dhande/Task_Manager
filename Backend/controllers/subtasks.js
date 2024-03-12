@@ -1,10 +1,10 @@
 const SubTaskSchema =  require('../models/SubTaskModel')
 
 exports.addSubTask = async(req,res) => {
-    const {name , taskTitle,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate} = req.body ;
+    const {email , taskTitle,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate ,Done} = req.body ;
 
     const subTasks = SubTaskSchema({
-        name , taskTitle,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate
+        email , taskTitle,SubTaskTitle, SubTaskContent, SubAdddate , SubTargetdate , Done
     }) ;
     try {
         await subTasks.save() ; 
@@ -19,7 +19,7 @@ exports.addSubTask = async(req,res) => {
 exports.getSubTasks = async(req , res) => {
     try{ 
         const subtasks =  await SubTaskSchema.find({
-            name: req.query.name,
+            email: req.query.email,
             taskTitle: req.query.taskTitle
           }).sort({ createdAt: -1 });
         res.status(200).json(subtasks) ; 
